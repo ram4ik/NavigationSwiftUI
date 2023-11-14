@@ -7,23 +7,23 @@
 
 import SwiftUI
 
-struct Student: Hashable {
-    var id = UUID()
-    var name: String
-    var age: Int
-}
-
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            List(0..<100) { i in
-                NavigationLink("Select \(i)", value: i)
+            List {
+                ForEach(0..<5) { i in
+                    NavigationLink("Select number: \(i)", value: i)
+                }
+                
+                ForEach(0..<5) { i in
+                    NavigationLink("Select string: \(i)", value: String(i))
+                }
             }
             .navigationDestination(for: Int.self) { selection in
-                Text("You selected \(selection)")
+                Text("You selected the number \(selection)")
             }
-            .navigationDestination(for: Student.self) { student in
-                Text("You selected \(student.name)")
+            .navigationDestination(for: String.self) { selection in
+                Text("You selected the string \(selection)")
             }
         }
     }
